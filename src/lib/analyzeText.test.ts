@@ -5,7 +5,7 @@ describe("analyzeText", () => {
   it("counts words, characters, sentences and paragraphs", () => {
     const result = analyzeText("Hello world. Hello again!\n\nA new paragraph.");
     expect(result.words).toBe(7);
-    expect(result.characters).toBe(44);
+    expect(result.characters).toBe(43);
     expect(result.sentences).toBe(3);
     expect(result.paragraphs).toBe(2);
   });
