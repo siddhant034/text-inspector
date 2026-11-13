@@ -108,3 +108,51 @@ h1 em { color: var(--teal); font-family: "Playfair Display", serif; font-weight:
   from { opacity: 0; transform: translateY(3px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* Theme toggle */
+.topbar-actions { display: flex; align-items: center; gap: 22px; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--line); border-radius: 7px; padding: 7px 10px;
+  background: var(--surface); color: var(--ink); font-size: 11px;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.theme-toggle:hover { border-color: var(--teal); }
+.theme-toggle span:first-child { font-size: 15px; line-height: 1; }
+
+:root {
+  color-scheme: light;
+  --page: #f7f7f3; --surface: #fff; --surface-subtle: #fcfcfa;
+  --text-soft: #69756f; --text-editor: #34433d; --line-soft: #edf0eb;
+  --stat-featured: #edf3ef; --stat-featured-border: #dce8df;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e6ece8; --muted: #9aa8a0; --line: #303d38; --teal: #8fc7b5;
+  --page: #151c19; --surface: #1d2622; --surface-subtle: #202b26;
+  --text-soft: #a5b2aa; --text-editor: #d6e0d9; --line-soft: #303d38;
+  --stat-featured: #263a32; --stat-featured-border: #385448;
+  background: var(--page);
+}
+body { background: var(--page); color: var(--ink); transition: background-color 160ms ease, color 160ms ease; }
+.intro-copy, .reading-row, .detail-row { color: var(--text-soft); }
+.workspace { background: var(--surface); }
+.insights-panel { background: var(--surface-subtle); }
+.editor-panel textarea { color: var(--text-editor); }
+.editor-panel textarea::placeholder { color: var(--muted); }
+.editor-footer { border-color: var(--line-soft); color: var(--muted); }
+.stat-featured { background: var(--stat-featured); border-color: var(--stat-featured-border); }
+.stat-label, .stat-foot, .word-list strong, .empty-state, .footer { color: var(--muted); }
+.word-list li { color: var(--text-soft); }
+.reading-row strong, .detail-row strong { color: var(--ink); }
+.live-label { color: var(--teal); background: var(--stat-featured); }
+.whitespace-section { border-color: var(--line); }
+.privacy-tooltip { background: var(--ink); color: var(--page); }
+.privacy-tooltip-arrow { fill: var(--ink); }
+@media (max-width: 520px) {
+  .topbar-actions { gap: 10px; }
+  .theme-toggle { padding: 7px; }
+  .theme-toggle span:last-child { display: none; }
+}
