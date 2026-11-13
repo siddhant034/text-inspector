@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import { analyzeText } from "./lib/analyzeText";
 
 const sampleText = `Good writing is clear thinking made visible.
@@ -22,12 +23,25 @@ function App() {
 
   return (
     <main className="page-shell">
+      <Tooltip.Provider delayDuration={300}>
       <header className="topbar">
         <a className="wordmark" href="/" aria-label="Text Inspector home">
           <span className="wordmark-icon">ti</span>
           <span>text inspector</span>
         </a>
-        <span className="privacy-note"><span className="status-dot" /> Your text stays in this browser</span>
+        <Tooltip.Root>
+          <Tooltip.Trigger asChild>
+            <span className="privacy-note privacy-trigger" tabIndex={0}>
+              <span className="status-dot" /> Your text stays in this browser
+            </span>
+          </Tooltip.Trigger>
+          <Tooltip.Portal>
+            <Tooltip.Content className="privacy-tooltip" sideOffset={8}>
+              Text analysis happens locally. Nothing is uploaded or stored by a server.
+              <Tooltip.Arrow className="privacy-tooltip-arrow" />
+            </Tooltip.Content>
+          </Tooltip.Portal>
+        </Tooltip.Root>
       </header>
 
       <section className="intro">
@@ -132,6 +146,7 @@ function App() {
         <span>TEXT INSPECTOR <span className="footer-divider">/</span> MADE FOR THE DETAILS</span>
         <span>Nothing is sent anywhere. Ever.</span>
       </footer>
+      </Tooltip.Provider>
     </main>
   );
 }
