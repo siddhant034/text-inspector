@@ -25,7 +25,7 @@ export function InsightsPanel({ analysis }: InsightsPanelProps) {
       <div className="reading-row"><span>Estimated reading time</span><strong>{analysis.readingMinutes === 0 ? "—" : `${analysis.readingMinutes} min`}</strong></div>
       <div className="detail-section">
         <span className="section-index">03 / TEXT DETAILS</span>
-        <div className="detail-row"><span>Characters excluding whitespace</span><strong>{analysis.charactersWithoutSpaces.toLocaleString()}</strong></div>
+        <div className="detail-row"><span>Characters excluding whitespace</span><strong>{analysis.charactersWithoutWhitespace.toLocaleString()}</strong></div>
         <div className="detail-row"><span>Repeated words</span><strong>{analysis.repeatedWords.length}</strong></div>
       </div>
       <div className="detail-section repeated-section">
