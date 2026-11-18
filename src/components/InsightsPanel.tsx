@@ -25,7 +25,7 @@ export function InsightsPanel({ analysis }: InsightsPanelProps) {
       <div className="reading-row"><span>Estimated reading time</span><strong>{analysis.readingMinutes === 0 ? "—" : `${analysis.readingMinutes} min`}</strong></div>
       <div className="detail-section">
         <span className="section-index">03 / TEXT DETAILS</span>
-        <div className="detail-row"><span>Characters without spaces</span><strong>{analysis.charactersWithoutSpaces.toLocaleString()}</strong></div>
+        <div className="detail-row"><span>Characters excluding whitespace</span><strong>{analysis.charactersWithoutSpaces.toLocaleString()}</strong></div>
         <div className="detail-row"><span>Repeated words</span><strong>{analysis.repeatedWords.length}</strong></div>
       </div>
       <div className="detail-section repeated-section">
@@ -41,8 +41,8 @@ export function InsightsPanel({ analysis }: InsightsPanelProps) {
       <div className="detail-section whitespace-section">
         <span className="section-index">05 / WHITESPACE CHECK</span>
         <div className="checks">
-          <span className={analysis.leadingWhitespace ? "check warning" : "check"}>{analysis.leadingWhitespace ? "!" : "✓"} Leading space</span>
-          <span className={analysis.trailingWhitespace ? "check warning" : "check"}>{analysis.trailingWhitespace ? "!" : "✓"} Trailing space</span>
+          <span className={analysis.leadingWhitespace ? "check warning" : "check"}>{analysis.leadingWhitespace ? "!" : "✓"} Leading whitespace</span>
+          <span className={analysis.trailingWhitespace ? "check warning" : "check"}>{analysis.trailingWhitespace ? "!" : "✓"} Trailing whitespace</span>
           <span className={analysis.repeatedSpaces ? "check warning" : "check"}>{analysis.repeatedSpaces ? "!" : "✓"} Repeated spaces</span>
           <span className={analysis.tabs ? "check warning" : "check"}>{analysis.tabs ? "!" : "✓"} Tabs</span>
         </div>
