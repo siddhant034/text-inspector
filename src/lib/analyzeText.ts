@@ -34,7 +34,7 @@ export function analyzeText(text: string): TextAnalysis {
 
   const frequencies = new Map<string, number>();
   for (const word of words) {
-    const normalized = word.toLowerCase();
+    const normalized = word.normalize("NFC").toLowerCase();
     frequencies.set(normalized, (frequencies.get(normalized) ?? 0) + 1);
   }
 
