@@ -11,7 +11,7 @@ function countCharacters(value: string): number {
 
 export interface TextAnalysis {
   characters: number;
-  charactersWithoutSpaces: number;
+  charactersWithoutWhitespace: number;
   words: number;
   sentences: number;
   paragraphs: number;
@@ -46,7 +46,7 @@ export function analyzeText(text: string): TextAnalysis {
 
   return {
     characters: countCharacters(text),
-    charactersWithoutSpaces: countCharacters(text.replace(/\s/gu, "")),
+    charactersWithoutWhitespace: countCharacters(text.replace(/\s/gu, "")),
     words: words.length,
     sentences: sentences.length,
     paragraphs,
