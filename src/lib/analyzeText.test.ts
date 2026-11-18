@@ -17,13 +17,13 @@ describe("analyzeText", () => {
     expect(result.paragraphs).toBe(0);
     expect(result.repeatedWords).toEqual([]);
     expect(result.characters).toBe(0);
-    expect(result.charactersWithoutSpaces).toBe(0);
+    expect(result.charactersWithoutWhitespace).toBe(0);
   });
 
   it("counts user-perceived characters rather than UTF-16 code units", () => {
     const result = analyzeText("A👋e\u0301👨‍👩‍👧‍👦");
     expect(result.characters).toBe(4);
-    expect(result.charactersWithoutSpaces).toBe(4);
+    expect(result.charactersWithoutWhitespace).toBe(4);
   });
 
   it("counts words containing Unicode combining marks and non-Latin letters", () => {
@@ -60,7 +60,7 @@ describe("analyzeText", () => {
   it("excludes all whitespace from the whitespace-free character count", () => {
     const result = analyzeText("a b\tc\n\u00a0d");
     expect(result.characters).toBe(8);
-    expect(result.charactersWithoutSpaces).toBe(4);
+    expect(result.charactersWithoutWhitespace).toBe(4);
   });
 
   it("estimates one sentence when text has no terminal punctuation", () => {
