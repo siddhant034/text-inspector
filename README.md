@@ -33,13 +33,14 @@ npm install
 npm run dev
 ```
 
-Run tests and build:
+Run the quality checks:
 
 ```bash
+npm run lint
 npm test
 npm run build
 ```
 
 ## Tech
 
-React, TypeScript, Vite, and Vitest.
+React, TypeScript, Vite, Vitest, React Testing Library, and ESLint.
