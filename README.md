@@ -43,4 +43,4 @@ npm run build
 
 ## Tech
 
-React, TypeScript, Vite, Vitest, React Testing Library, and ESLint.
+React, TypeScript, Vite, Vitest, React Testing Library, and Oxlint.
