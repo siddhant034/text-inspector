@@ -18,9 +18,9 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         <div className="topbar-actions">
           <Tooltip.Root>
             <Tooltip.Trigger asChild>
-              <span className="privacy-note privacy-trigger" tabIndex={0}>
+              <button className="privacy-note privacy-trigger" type="button">
                 <span className="status-dot" /> Your text stays in this browser
-              </span>
+              </button>
             </Tooltip.Trigger>
             <Tooltip.Portal>
               <Tooltip.Content className="privacy-tooltip" sideOffset={8}>
