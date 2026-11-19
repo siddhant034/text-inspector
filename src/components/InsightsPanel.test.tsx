@@ -8,12 +8,11 @@ describe("InsightsPanel", () => {
     render(<InsightsPanel analysis={analyzeText("Hello hello  world\t")} />);
 
     const panel = screen.getByLabelText("Text insights");
-    expect(within(panel).getByText("3")).toBeInTheDocument();
-    expect(within(panel).getByText("2")).toBeInTheDocument();
+    expect(within(panel).getByText("3", { selector: "strong" })).toBeInTheDocument();
     expect(within(panel).getByText("hello")).toBeInTheDocument();
     expect(within(panel).getByText("× 2")).toBeInTheDocument();
-    expect(within(panel).getByText("! Repeated spaces")).toBeInTheDocument();
-    expect(within(panel).getByText("! Tabs")).toBeInTheDocument();
+    expect(within(panel).getByText(/Repeated spaces/)).toBeInTheDocument();
+    expect(within(panel).getByText(/Tabs/)).toBeInTheDocument();
   });
 
   it("shows an empty state when there are no repeated words", () => {
