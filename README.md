@@ -26,20 +26,21 @@ Text is processed locally in your browser. There is no backend, account, or text
 
 ## Development
 
-Requires Node.js 20.19+ or 22.12+.
+Requires Node.js 22.13+ or 24+.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Run tests and build:
+Run the quality checks:
 
 ```bash
+npm run lint
 npm test
 npm run build
 ```
 
 ## Tech
 
-React, TypeScript, Vite, and Vitest.
+React, TypeScript, Vite, Vitest, React Testing Library, and Oxlint.
