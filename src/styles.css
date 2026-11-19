@@ -156,3 +156,36 @@ body { background: var(--page); color: var(--ink); transition: background-color 
   .theme-toggle { padding: 7px; }
   .theme-toggle span:last-child { display: none; }
 }
+
+/* Keyboard accessibility */
+.privacy-trigger {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+}
+:where(a, button, textarea):focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+.editor-panel textarea:focus-visible {
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.privacy-trigger:focus-visible {
+  border-radius: 3px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
