@@ -1,7 +1,22 @@
+import { useState } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { TextEditor } from "./TextEditor";
+
+function ControlledTextEditor() {
+  const [text, setText] = useState("");
+
+  return (
+    <TextEditor
+      text={text}
+      characterCount={text.length}
+      onTextChange={setText}
+      onClear={() => setText("")}
+      onCopy={vi.fn()}
+    />
+  );
+}
 
 describe("TextEditor", () => {
   it("renders the current text and character count", () => {
@@ -19,24 +34,15 @@ describe("TextEditor", () => {
     expect(screen.getByText("5 characters")).toBeInTheDocument();
   });
 
-  it("forwards edits to the parent", async () => {
+  it("updates the controlled text as the user types", async () => {
     const user = userEvent.setup();
-    const onTextChange = vi.fn();
+    render(<ControlledTextEditor />);
 
-    render(
-      <TextEditor
-        text=""
-        characterCount={0}
-        onTextChange={onTextChange}
-        onClear={vi.fn()}
-        onCopy={vi.fn()}
-      />,
-    );
+    const editor = screen.getByRole("textbox", { name: "Enter text to inspect" });
+    await user.type(editor, "A short note");
 
-    await user.type(screen.getByRole("textbox"), "A short note");
-
-    expect(onTextChange).toHaveBeenLastCalledWith("e");
-    expect(onTextChange).toHaveBeenCalledTimes(12);
+    expect(editor).toHaveValue("A short note");
+    expect(screen.getByText("12 characters")).toBeInTheDocument();
   });
 
   it("invokes clear and copy callbacks and disables both actions for empty text", async () => {
