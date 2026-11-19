@@ -26,7 +26,7 @@ Text is processed locally in your browser. There is no backend, account, or text
 
 ## Development
 
-Requires Node.js 20.19+ or 22.12+.
+Requires Node.js 22.13+ or 24+.
 
 ```bash
 npm install
