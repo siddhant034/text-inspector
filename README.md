@@ -10,6 +10,7 @@ A simple, privacy-first text analysis tool for inspecting, counting, and compari
 - Whitespace checks for leading/trailing spaces, repeated spaces, and tabs
 - Copy and clear actions
 - Responsive layout
+- Background text analysis for large inputs
 
 ## Counting behavior
 
@@ -22,7 +23,7 @@ A simple, privacy-first text analysis tool for inspecting, counting, and compari
 
 ## Privacy
 
-Text is processed locally in your browser. There is no backend, account, or text upload.
+Text is processed locally in your browser. Analysis runs in a Web Worker when supported, keeping the editor responsive while statistics are calculated. There is no backend, account, or text upload.
 
 ## Development
 
