@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   base: "/text-inspector/",
   test: {
-    environment: "node",
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
   },
 });
