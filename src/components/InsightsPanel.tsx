@@ -9,6 +9,9 @@ type InsightsPanelProps = {
 export function InsightsPanel({ analysis }: InsightsPanelProps) {
   return (
     <aside className="insights-panel" aria-label="Text insights">
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {analysis.words} words, {analysis.characters} characters, {analysis.sentences} estimated sentences, and {analysis.paragraphs} paragraphs.
+      </p>
       <div className="panel-heading insights-heading">
         <div>
           <span className="section-index">02 / INSIGHTS</span>
