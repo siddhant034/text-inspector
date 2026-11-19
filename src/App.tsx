@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { analyzeText } from "./lib/analyzeText";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -21,7 +21,60 @@ function getInitialTheme(): "light" | "dark" {
 function App() {
   const [text, setText] = useState(sampleText);
   const [theme, setTheme] = useState<"light" | "dark">(getInitialTheme);
-  const analysis = useMemo(() => analyzeText(text), [text]);
+  const [analysis, setAnalysis] = useState(() => analyzeText(text));
+  const workerRef = useRef<Worker | null>(null);
+  const requestIdRef = useRef(0);
+  const latestTextRef = useRef(text);
+
+  latestTextRef.current = text;
+
+  useEffect(() => {
+    if (typeof Worker === "undefined") return;
+
+    let worker: Worker;
+    try {
+      worker = new Worker(new URL("./lib/analyzeText.worker.ts", import.meta.url), {
+        type: "module",
+      });
+    } catch {
+      return;
+    }
+
+    workerRef.current = worker;
+    worker.onmessage = (event: MessageEvent<{
+      requestId: number;
+      analysis: ReturnType<typeof analyzeText>;
+    }>) => {
+      if (event.data.requestId === requestIdRef.current) {
+        setAnalysis(event.data.analysis);
+      }
+    };
+    worker.onerror = () => {
+      worker.terminate();
+      workerRef.current = null;
+      setAnalysis(analyzeText(latestTextRef.current));
+    };
+
+    return () => {
+      worker.terminate();
+      workerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const worker = workerRef.current;
+    if (!worker) {
+      setAnalysis(analyzeText(text));
+      return;
+    }
+
+    const requestId = ++requestIdRef.current;
+    const timeoutId = window.setTimeout(() => {
+      worker.postMessage({ requestId, text });
+    }, 100);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [text]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
